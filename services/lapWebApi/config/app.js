@@ -6,11 +6,12 @@ const express = require('express'),
       morgan = require('morgan'),
       bodyParser = require("body-parser"),
       employer = require('../app/routers/employer'),
+      handlingError = require('../app/routers/handlingError'),
       conectDB = require('./database');
 
 conectDB();
 app.set('port', process.env.PORT || 3000);
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.get('/posts', (req, res) => {
       res.send(
@@ -21,5 +22,6 @@ app.get('/posts', (req, res) => {
       )
     })
 employer(app);
+handlingError(app);
 
 module.exports = app;

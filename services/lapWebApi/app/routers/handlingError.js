@@ -3,10 +3,9 @@ module.exports = function (app) {
         console.error(err.stack);
         res.status(err.status || 500);
         res.json({
-            error: {
-                status: res.status,
+                status: err.status,
                 message: err.message
             }
-        });
+        );
     });
 }

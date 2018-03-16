@@ -17,7 +17,7 @@ const mongoose = require('mongoose'),
                 if (v < 0){ return false}
                 return true;
             },
-            message: 'the {VALUE} can not be negative.'
+            message: 'the value {VALUE} can not be negative.'
             }
         }
     });
@@ -26,11 +26,11 @@ const mongoose = require('mongoose'),
         // is more that 100%. 
         let employer = this;
         if(employer.percetegens > 100){
-            let err = new Error("the valor percetegens must be 100% or minor");
+            let err = new Error("the valor percetegens must be 100% or less");
             err.status = 404;
-            done(err);
+            return done(err);
         }
-        done();
+        return done();
     });
 const Employer = mongoose.model('employer', employerSchema);
 module.exports = Employer;

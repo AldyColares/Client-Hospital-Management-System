@@ -1,5 +1,5 @@
 {
-  "name": "lap-Web",
+  "name": "lap",
   "version": "1.0.0",
   "description": "A Vue.js and Node.js Budget Manager application",
   "scripts": {
