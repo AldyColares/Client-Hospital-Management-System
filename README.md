@@ -1,3 +1,3 @@
 # Client 
 
-The client of layer of of project Hospital Management System.
+The layer of the client of the project Hospital Management System. The use of API Reactjs.
