@@ -14,13 +14,12 @@ class Auth extends Component {
       email: {
         elementType: 'input',
         elementConfig: {
-          type: 'email',
-          placeholder: 'Mail Address'
+          type: 'text',
+          placeholder: 'Indentification Name'
         },
         value: '',
         validation: {
           required: true,
-          isEmail: true
         },
         valid: false,
         touched: false

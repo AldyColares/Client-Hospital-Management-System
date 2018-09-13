@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import * as actionsTypes from './actionsTypes';
+import * as actionsTypes from './actionTypes';
 
 export const authStart = () => {
   return {
@@ -48,10 +48,12 @@ export const auth = (email, password, isSignup) => {
       password: password,
       returnSegureToken: true
     };
+    
     let url = 'https://'
     if (!isSignup) {
       url = 'https://'
     }
+
     axios.post(url, authData)
       .then(response => {
         console.log(response);
