@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import Input from '../UI/Input/Input';
 import Button from '../UI/button/Button'
 import classes from './Form.css';
+import validator from 'validator';
 
 class Form extends Component {
     state = {
         orderForm: {
-            name: {
+          patientId: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Name',
+                    placeholder: 'Indentification Patient',
                 },
                 value: '',
                 validation: {
@@ -19,11 +20,11 @@ class Form extends Component {
                 valid: false,
                 touched: false
             },
-            batch: {
+            recordNo: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Batch'
+                    placeholder: 'Number Record'
                 },
                 value: '',
                 validation: {
@@ -32,11 +33,11 @@ class Form extends Component {
                 valid: false,
                 touched: false
             },
-            quantity: {
+            discription: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'number',
-                    placeholder: 'Quantity of medicines'
+                    placeholder: 'Description'
                 },
                 value: '',
                 validation: {
@@ -46,11 +47,11 @@ class Form extends Component {
                 valid: false,
                 touched: false
             },
-            expiration: {
+            appoinmest: {
                 elementType: 'input',
                 elementConfig: {
-                    type: 'date',
-                    placeholder: 'The date of expiration'
+                    type: 'string',
+                    placeholder: 'appoinmest'
                 },
                 value: '',
                 validation: {
