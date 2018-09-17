@@ -3,21 +3,19 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Header from '../componets/Header'
 import HomePage from '../pages/HomePage'
-import UsersPage from '../pages/UsersPage'
-import ProductsPage from '../pages/ProductsPage'
+import AccountantPage from '../pages/AccountantPage'
 
-const PrimaryLayout = ({ match }) => (
+const AccountantLayout = ({ match }) => (
   <div className="primary-layout">
     <Header />
     <main>
       <Switch>
         <Route path={`${match.path}`} exact component={HomePage} />
-        <Route path={`${match.path}/users`} component={UsersPage} />
-        <Route path={`${match.path}/products`} component={ProductsPage} />
+        <Route path={`${match.path}/accountant`} component={AccountantPage} />>
         <Redirect to={`${match.url}`} />
       </Switch>
     </main>
   </div>
 )
 
-export default PrimaryLayout
+export default AccountantLayout
