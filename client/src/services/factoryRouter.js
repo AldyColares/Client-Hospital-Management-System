@@ -1,10 +1,10 @@
-import routerAccountant from '../layouts/RouterAccountant';
-import routerAdmin from '../layouts/RouterAdmin';
-import routerDoctor from '../layouts/RouterDoctor';
-import routerNurse from '../layouts/RouterNurse';
-import routerPatient from '../layouts/RouterPatient';
-import routerPharmacist from '../layouts/RouterPharmacist';
-import routerReceptionist from '../layouts/RouterReceptionist';
+import routerAccountant from '../routers/RouterAccountant';
+import routerAdmin from '../routers/RouterAdmin';
+import routerDoctor from '../routers/RouterDoctor';
+import routerNurse from '../routers/RouterNurse';
+import routerPatient from '../routers/RouterPatient';
+import routerPharmacist from '../routers/RouterPharmacist';
+import routerReceptionist from '../routers/RouterReceptionist';
 
 /**
  * The function return a router according with parameter.     
