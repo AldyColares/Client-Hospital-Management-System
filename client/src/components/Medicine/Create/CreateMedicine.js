@@ -3,6 +3,8 @@ import axios from ',,/../../axios-order';
 import Input from '../UI/Input/Input';
 import Button from '../UI/button/Button'
 import classes from './Form.css';
+//import qs from 'qs';
+
 
 class CreateMedicine extends Component {
     state = {
@@ -103,6 +105,31 @@ class CreateMedicine extends Component {
         this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
     }
 
+    sendMedicineToServer = () => {
+        const url = '/register-medicine';
+        let date = {},
+        
+        auth = {
+            username: Config.clientId,
+            password: Config.clientSecret
+        };
+
+        for(let key in this.state.orderForm){
+            date[key] = this.state.orderForm[key].value;
+        }
+        date = JSON.stringify(date);
+        axios.post( url , date, { headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        }, auth: this.state.user.token
+        }
+    )
+            .then( response => {
+                // Redux with confirmation. 
+            })
+            .catch( error => {
+                // Redux with error.
+            } );
+    }
     render() {
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
@@ -125,7 +152,7 @@ class CreateMedicine extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 })}
-                <Button btnType="Success" disabled={!this.state.formIsValid}>SEND</Button>
+                <Button btnType="Success" clicked={this.props.sendMedicineToServer} disabled={!this.state.formIsValid}>SEND</Button>
             </form>
         );
         return (
