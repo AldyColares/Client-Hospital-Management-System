@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import actions from './store/actions/index';
 
+import Aux from '../src/hoc Higher-Order Components/Aux';
 import Auth from '../src/containers/Auth/Auth';
 import Logout from '../src/containers/Auth/Logout/Logout';
 import factorePage from '../src/services/FactoryPage';
@@ -17,17 +19,18 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path="/auth" component={Auth} />
-        <Route path="/" exact component={} />
+        <Route path="/" exact component={Auth} />
         <Redirect to="/" />
       </Switch>
     );
 
+    let Layout;
     if (this.props.isAuthenticated) {
-      let Layout = factorePage(this.props.theTypeUserIs);
+      Layout = ( factorePage(this.props.theTypeUserIs) );
       routes = (
         <Switch>
           <Route path="/logout" component={Logout} />
-          <Route path="/" exact component={} />
+          <Route path="/" exact component={Auth} />
           <Redirect to="/" />
         </Switch>
       );
@@ -35,7 +38,7 @@ class App extends Component {
 
     return (
       <div>
-        <Layout>
+        <Layout >
           {routes}
         </Layout>
       </div>

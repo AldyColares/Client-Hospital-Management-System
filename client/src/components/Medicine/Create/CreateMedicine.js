@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from ',,/../../axios-order';
+
 import Input from '../UI/Input/Input';
-import Button from '../UI/button/Button'
+import Button from '../../UI/button/Button'
 import classes from './Form.css';
-//import qs from 'qs';
+import axios from '../../../../axios-orders';
 
 
 class CreateMedicine extends Component {
@@ -65,7 +65,10 @@ class CreateMedicine extends Component {
             }
         },
         formIsValid: false,
-        loading: false
+        loading: false,
+        errorSendMedicine: false,
+        errorTokenNotFound: false,
+        messageErrorSendMedicine: false
     }
 
     checkValidity(value, rules) {
@@ -106,61 +109,72 @@ class CreateMedicine extends Component {
     }
 
     sendMedicineToServer = () => {
-        const url = '/register-medicine';
-        let date = {},
-        
-        auth = {
-            username: Config.clientId,
-            password: Config.clientSecret
-        };
 
-        for(let key in this.state.orderForm){
+        if (!localStorage.getItem('token')) {
+            this.setState = {
+                errorTokenNotFound: true
+            }
+            return;
+        }
+
+        const url = '/register-medicine';
+        let date = {};
+
+        for (let key in this.state.orderForm) {
             date[key] = this.state.orderForm[key].value;
         }
+
         date = JSON.stringify(date);
-        axios.post( url , date, { headers: {
-            'content-type': 'application/x-www-form-urlencoded'
-        }, auth: this.state.user.token
-        }
+        axios.post ( url, date, {
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded'
+            }, 
+            auth: localStorage.getItem('token')
+        })
+        .then(response => {
+                // Server with confirmation. 
+        })
+        .catch(error => {
+            if (!localStorage.getItem('token')) {
+                this.setState({
+                    errorSendMedicine: true,
+                    messageErrorSendMedicine: error.message
+                });
+            } 
+        });
+}
+
+render() {
+    const formElementsArray = [];
+    for (let key in this.state.orderForm) {
+        formElementsArray.push({
+            id: key,
+            config: this.state.orderForm[key]
+        });
+    }
+    // eslint-disable-next-line
+    let form = (
+        <form>
+            {formElementsArray.map(formElement => {
+                return <Input
+                    key={formElement.id}
+                    elementType={formElement.config.elementType}
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    invalid={!formElement.config.valid}
+                    shouldValidate={formElement.config.validation}
+                    touched={formElement.config.touched}
+                    changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+            })}
+            <Button btnType="Success" clicked={this.props.sendMedicineToServer} disabled={!this.state.formIsValid}>SEND</Button>
+        </form>
+    );
+    return (
+        <div className={classes.Form}>
+            {form}
+        </div>
     )
-            .then( response => {
-                // Redux with confirmation. 
-            })
-            .catch( error => {
-                // Redux with error.
-            } );
-    }
-    render() {
-        const formElementsArray = [];
-        for (let key in this.state.orderForm) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.orderForm[key]
-            });
-        }
-        // eslint-disable-next-line
-        let form = (
-            <form>
-                {formElementsArray.map(formElement => {
-                    return <Input
-                        key={formElement.id}
-                        elementType={formElement.config.elementType}
-                        elementConfig={formElement.config.elementConfig}
-                        value={formElement.config.value}
-                        invalid={!formElement.config.valid}
-                        shouldValidate={formElement.config.validation}
-                        touched={formElement.config.touched}
-                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
-                })}
-                <Button btnType="Success" clicked={this.props.sendMedicineToServer} disabled={!this.state.formIsValid}>SEND</Button>
-            </form>
-        );
-        return (
-            <div className={classes.Form}>
-                {form}
-            </div>
-        )
-    }
+}
 }
 
 export default Form;

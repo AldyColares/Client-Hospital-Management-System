@@ -1,16 +1,15 @@
-
-import pageAccountant from '../pages/PageAccountant';
-import pageAdmin from '../pages/PageAdmin';
-import pageDoctor from '../pages/PageDoctor';
-import pageNurse from '../pages/PageNurse';
-import pagePatient from '../pages/PagePatient';
-import pagePharmacist from '../pages/PagePharmacist';
-import pageReceptionist from '../pages/PageReceptionist';
+import pageAccountant from '../components/Pages/Accountant/AccountantPage';
+import pageAdmin from '../components/Pages/Admin/AdminPage';
+import pageDoctor from '../components/Pages/Doctor/DoctorPage';
+import pageNurse from '../components/Pages/Nurse/NursePage';
+import pagePatient from '../components/Pages/Patient/PatientPage';
+import pagePharmacist from '../components/Pages/Pharmacist/PharmacistPage';
+import pageReceptionist from '../components/Pages/Receptionist/ReceptionistPage';
 
 /**
  * The function return a router according with parameter.     
  * @param  {String} String - The name of layout. 
- * @returns {Routers} callback - Return Router    
+ * @returns {page} - Return personal page.    
  */
 
 export default function (page) {

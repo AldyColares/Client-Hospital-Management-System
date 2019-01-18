@@ -4,11 +4,11 @@ import * as actionsTypes from './actionTypes';
 
 export const authStart = () => {
   return {
-    type: actiontypes.AUTH_START
+    type: this.actiontypes.AUTH_START
   };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, typeUser) => {
   return {
     type: actionsTypes.AUTH_SUCCESS,
     idToken: token,
