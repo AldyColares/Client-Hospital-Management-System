@@ -52,6 +52,7 @@
     "whatwg-fetch": "^2.0.4"
   },
   "proxy": "http://localhost:3000",
+  
   "scripts": {
     "start": "node scripts/start.js",
     "server": "cd ../../server && npm start",

@@ -4,7 +4,7 @@ import Button from '../UI/button/Button';
 
 class RequestUpdate extends Component {
 
-  update(props) {
+  update() {
     const propertiesForUpdate = this.props.propertiesForUpdate;
 
     if(typeof propertiesForUpdate  !== 'object') {
